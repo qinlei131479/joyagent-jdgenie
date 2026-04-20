@@ -29,8 +29,9 @@ class ColumnFilterModule:
                 column_info: List[Dict],
                  ):
         
-        self.llm_model_name = os.getenv("TR_TABLE_FILTER_MODEL_NAME")
-        self.table_filter_model_name = os.getenv("TR_COLUMN_FILTER_MODEL_NAME")
+        _default = os.getenv("DEFAULT_MODEL", "gpt-4.1")
+        self.llm_model_name = os.getenv("TR_TABLE_FILTER_MODEL_NAME") or _default
+        self.table_filter_model_name = os.getenv("TR_COLUMN_FILTER_MODEL_NAME") or _default
         
         self._is_first_filter_table = os.getenv("TR_IS_FIRST_FILTER_TABLE", True)
         self.need_filter_table_min_length = int(os.getenv("TR_NEED_FILTER_TABLE_MIN_LENGTH", 3))
